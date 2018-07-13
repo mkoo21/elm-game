@@ -7,54 +7,146 @@ import Block exposing (block)
 import Colors exposing (red, blue, green, yellow, purple, sky, orange)
 
 
+type alias Point =
+    { x : Float
+    , y : Float
+    }
+
+
 type alias Shape =
-    List ( Int, Int )
+    List Point
 
 
 type alias Tetromino =
     { shape : Shape
     , color : String
+    , width : Int
+    , height : Int
+    , center : Point
 
     --, orientation : Int
     --, isCurrent : Bool
     }
 
 
-tetromino : Shape -> String -> List (Svg.Svg msg)
-tetromino shape color =
+tetromino : Tetromino -> List (Svg.Svg msg)
+tetromino piece =
     let
         renderBlock ( x, y ) =
-            block color x y
+            block piece.color x y
     in
-        List.map renderBlock shape
+        List.map renderBlock piece.shape
 
 
 ipiece =
-    tetromino [ ( 0, 0 ), ( 0, 1 ), ( 0, 2 ), ( 0, 3 ) ] sky
+    tetromino
+        { shape =
+            [ { x = 0, y = 0 }
+            , { x = 0, y = 1 }
+            , { x = 0, y = 2 }
+            , { x = 0, y = 3 }
+            ]
+        , color = sky
+        , width = 1
+        , height = 4
+        , center = { x = 0.5, y = 2 }
+        }
 
 
 opiece =
-    tetromino [ ( 0, 0 ), ( 0, 1 ), ( 1, 0 ), ( 1, 1 ) ] yellow
+    tetromino
+        { shape =
+            [ { x = 0, y = 0 }
+            , { x = 0, y = 1 }
+            , { x = 1, y = 0 }
+            , { x = 1, y = 1 }
+            ]
+        , color = yellow
+        , width = 2
+        , height = 2
+        , center = { x = 1, y = 1 }
+        }
 
 
 tpiece =
-    tetromino [ ( 0, 1 ), ( 1, 0 ), ( 1, 1 ), ( 2, 1 ) ] purple
+    tetromino
+        { shape =
+            [ { x = 0, y = 1 }
+            , { x = 1, y = 0 }
+            , { x = 1, y = 1 }
+            , { x = 2, y = 1 }
+            ]
+        , color = purple
+        , width = 3
+        , height = 2
+        , center = { x = 1.5, y = 1.0 }
+        }
 
 
 jpiece =
-    tetromino [ ( 0, 0 ), ( 0, 1 ), ( 0, 2 ), ( 1, 0 ) ] blue
+    tetromino
+        { shape =
+            [ { x = 0, y = 0 }
+            , { x = 0, y = 1 }
+            , { x = 0, y = 2 }
+            , { x = 1, y = 0 }
+            ]
+        , color = blue
+        , width = 2
+        , height = 3
+        , center = { x = 1.0, y = 1.5 }
+        }
 
 
 lpiece =
-    tetromino [ ( 1, 0 ), ( 1, 1 ), ( 1, 2 ), ( 0, 0 ) ] orange
+    tetromino
+        { shape =
+            [ { x = 1, y = 0 }
+            , { x = 1, y = 1 }
+            , { x = 1, y = 2 }
+            , { x = 0, y = 0 }
+            ]
+        , color = orange
+        , width = 2
+        , height = 3
+        , center = { x = 1.0, y = 1.5 }
+        }
 
 
 spiece =
-    tetromino [ ( 1, 0 ), ( 0, 1 ), ( 1, 1 ), ( 2, 0 ) ] green
+    tetromino
+        { shape =
+            [ { x = 1, y = 0 }
+            , { x = 0, y = 1 }
+            , { x = 1, y = 1 }
+            , { x = 2, y = 0 }
+            ]
+        , color = green
+        , width = 3
+        , height = 2
+        , center = { x = 1.5, y = 1.0 }
+        }
 
 
 zpiece =
-    tetromino [ ( 0, 0 ), ( 1, 0 ), ( 1, 1 ), ( 2, 1 ) ] red
+    tetromino
+        { shape =
+            [ { x = 0, y = 0 }
+            , { x = 1, y = 0 }
+            , { x = 1, y = 1 }
+            , { x = 2, y = 1 }
+            ]
+        , color = red
+        , width = 3
+        , height = 2
+        , center = { x = 1.5, y = 1.0 }
+        }
+
+
+
+-- Rotation matrix: [[0, -1], [1, 0]]
+--rotateClockwise : Point -> Point
+--rotateClockwise =
 
 
 main =

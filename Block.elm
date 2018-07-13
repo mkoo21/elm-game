@@ -5,12 +5,12 @@ import Svg.Attributes exposing (..)
 import Colors exposing (red, blue, green, yellow, purple, sky, orange)
 
 
-blockSize : Int
+blockSize : Float
 blockSize =
     25
 
 
-block : String -> Int -> Int -> Svg.Svg msg
+block : String -> Float -> Float -> Svg.Svg msg
 block color a b =
     rect
         [ width (toString blockSize)

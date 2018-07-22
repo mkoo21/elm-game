@@ -1,16 +1,11 @@
 module Tetromino exposing (..)
 
 import List
+import Math exposing (Point, binop, rotateClockwise, rotateCounterclockwise)
 import Svg exposing (svg)
 import Svg.Attributes exposing (..)
 import Block exposing (block)
 import Colors exposing (red, blue, green, yellow, purple, sky, orange)
-
-
-type alias Point =
-    { x : Float
-    , y : Float
-    }
 
 
 type alias Shape =
@@ -141,12 +136,6 @@ zpiece =
         , height = 2
         , center = { x = 1.5, y = 1.0 }
         }
-
-
-
--- Rotation matrix: [[0, -1], [1, 0]]
---rotateClockwise : Point -> Point
---rotateClockwise =
 
 
 main =
